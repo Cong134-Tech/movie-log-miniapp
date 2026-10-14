@@ -26,7 +26,8 @@ Page({
       this.hydratePosters(nextResults)
     } catch (error) {
       this.setData({ results: searchLocal(query).map(movie => ({ ...movie, watchCount: getMovieCount(movie.id) })), loading: false, usingDemo: true })
-      wx.showToast({ title: '真实搜索暂不可用，已切换示例', icon: 'none' })
+      const message = error && error.errMsg ? error.errMsg : error && error.message ? error.message : '云函数连接失败'
+      wx.showToast({ title: `搜索失败：${message.slice(0, 18)}`, icon: 'none', duration: 3000 })
     }
   },
   async hydratePosters(movies) {

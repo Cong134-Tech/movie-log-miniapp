@@ -4,13 +4,27 @@ const CLOUD_ENV_ID = 'movie-log-d9gm1e59441d5f6e4'
 const CLOUD_FUNCTION = 'tmdbProxy'
 
 function isEnabled() {
-  return Boolean(CLOUD_ENV_ID && wx.cloud)
+  return Boolean(CLOUD_ENV_ID && wx.cloud && typeof wx.cloud.callFunction === 'function')
 }
 
-function call(action, payload = {}) {
+let initialized = false
+
+function ensureInitialized() {
+  if (!isEnabled() || initialized) return
+  try {
+    wx.cloud.init({ env: CLOUD_ENV_ID, traceUser: false })
+  } catch (error) {
+    // App.onLaunch may have initialized CloudBase already.
+  }
+  initialized = true
+}
+
+function callOnce(action, payload = {}) {
   return new Promise((resolve, reject) => {
+    ensureInitialized()
     wx.cloud.callFunction({
       name: CLOUD_FUNCTION,
+      config: { env: CLOUD_ENV_ID },
       data: { action, ...payload },
       success: response => {
         const result = response && response.result
@@ -20,6 +34,17 @@ function call(action, payload = {}) {
       fail: reject
     })
   })
+}
+
+async function call(action, payload = {}) {
+  try {
+    return await callOnce(action, payload)
+  } catch (error) {
+    // The first call after launch can race cloud initialization on a real device.
+    initialized = false
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return callOnce(action, payload)
+  }
 }
 
 function cachePoster(movieId, posterPath) {
