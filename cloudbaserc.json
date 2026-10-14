@@ -1,0 +1,13 @@
+{
+  "$schema": "https://static.cloudbase.net/cli/cloudbaserc.schema.json",
+  "envId": "movie-log-d9gm1e59441d5f6e4",
+  "functionRoot": "cloudfunctions",
+  "functions": [
+    {
+      "name": "tmdbProxy",
+      "runtime": "Nodejs16.13",
+      "handler": "index.main",
+      "installDependency": true
+    }
+  ]
+}
