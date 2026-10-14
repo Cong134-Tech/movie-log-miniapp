@@ -41,7 +41,7 @@
 
 大陆网络直连方案已预留：`cloudfunctions/tmdbProxy` 会在云端请求 TMDB，并可把海报缓存到手机本地；手机端不再直接请求 TMDB。要启用它，需要创建微信云开发环境、在云函数中设置 `TMDB_API_READ_TOKEN`，并把环境 ID 填入 `utils/cloud.js` 的 `CLOUD_ENV_ID` 后部署函数。当前环境 ID 为空时仍保留直连兜底，便于开发者工具调试。建议选择新加坡区域并实际验证函数出网与小程序 SDK 连通性；云函数调用及出网流量按 CloudBase 套餐和资源点计费。
 
-首页新增了无水印的电影胶片 logo，源文件在 `assets/source/logo.svg`，小程序头像文件在 `assets/logo-appicon.png`（144×144）。首页展示使用 `assets/logo.png`；微信后台的小程序头像仍需在「基本设置」中单独上传。
+首页使用了从你提供的图片中裁切并透明化处理的电影胶片 logo，已移除白色背景和右下角水印区域。小程序头像文件在 `assets/logo-appicon.png`（144×144），首页展示使用 `assets/logo.png`；微信后台的小程序头像仍需在「基本设置」中单独上传。
 
 TMDB 的非商业使用要求与体验版权限分别处理。应用内「统计 → 关于手账」已展示 TMDB 官方标识与声明；实际使用仍需遵守申请凭证时接受的条款。官方说明可参考 TMDB Developer FAQ 与腾讯客服「小程序成员管理」。
 
