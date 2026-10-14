@@ -3,7 +3,8 @@
     "pages/home/home",
     "pages/library/library",
     "pages/stats/stats",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/wall/wall"
   ],
   "window": {
     "navigationBarTitleText": "我的观影手账",

@@ -60,6 +60,9 @@ Page({
     const movie = encodeURIComponent(JSON.stringify(event.currentTarget.dataset.movie))
     wx.navigateTo({ url: `/pages/detail/detail?movie=${movie}` })
   },
+  openWall() {
+    wx.navigateTo({ url: '/pages/wall/wall' })
+  },
   exportRecords() {
     const records = getRecords()
     if (!records.length) return wx.showToast({ title: '还没有观看记录', icon: 'none' })
