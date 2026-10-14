@@ -19,6 +19,17 @@
     <view class="settings-row" bindtap="configureToken"><image class="settings-icon" src="/assets/icons/link.png" /><view class="settings-copy"><view class="settings-title">配置 TMDB</view><view class="settings-caption">{{tokenConfigured ? '电影资料已连接 · 可更新凭证' : '连接电影海报与详细资料'}}</view></view><text class="chevron">›</text></view>
     <view class="settings-row" bindtap="exportRecords"><image class="settings-icon" src="/assets/icons/export.png" /><view class="settings-copy"><view class="settings-title">导出观看记录</view><view class="settings-caption">为你的观影记忆留一份备份</view></view><text class="chevron">›</text></view>
   </view>
+  <view class="section-head"><view class="section-title">关于手账</view></view>
+  <view class="panel about-panel">
+    <view class="about-name">我的观影手账</view>
+    <view class="about-caption">个人观影记录 · 无广告、无付费功能</view>
+    <view class="about-caption">观看记录保存在当前设备，请定期导出备份。</view>
+    <view class="data-credit">
+      <image class="tmdb-logo" src="/assets/icons/tmdb-logo.png" mode="aspectFit" />
+      <view class="about-caption">电影资料与海报来自 The Movie Database (TMDB)。</view>
+      <view class="attribution">This product uses the TMDB API but is not endorsed or certified by TMDB.</view>
+    </view>
+  </view>
   <view class="footer-note">YOUR OWN CINEMA HISTORY</view>
 </view>
 <view wx:if="{{tokenSheetVisible}}" class="sheet-mask" bindtap="closeTokenSheet" catchtouchmove="stopTouch"></view>

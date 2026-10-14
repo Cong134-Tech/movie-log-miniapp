@@ -1,6 +1,12 @@
 {
   "description": "我的观影手账",
-  "packOptions": { "ignore": [] },
+  "packOptions": {
+    "ignore": [
+      { "type": "folder", "value": "assets/source" },
+      { "type": "file", "value": "assets/poster-placeholder.svg" },
+      { "type": "file", "value": "README.md" }
+    ]
+  },
   "setting": {
     "es6": true,
     "minified": true,

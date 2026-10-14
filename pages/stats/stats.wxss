@@ -26,6 +26,11 @@
 .settings-copy { flex: 1; min-width: 0; }
 .settings-title { font-size: 27rpx; }
 .settings-caption { color: #88808f; font-size: 21rpx; margin-top: 9rpx; line-height: 1.5; }
+.about-name { color: #e7e1e8; font-size: 28rpx; font-weight: 500; }
+.about-caption { color: #a39ba9; font-size: 22rpx; line-height: 1.7; margin-top: 12rpx; }
+.data-credit { border-top: 1rpx solid #302b34; padding-top: 24rpx; margin-top: 24rpx; }
+.tmdb-logo { display: block; width: 180rpx; height: 28rpx; }
+.attribution { color: #9a91a0; font-size: 21rpx; line-height: 1.7; margin-top: 16rpx; }
 .sheet-behind { filter: blur(7px) !important; transition: filter 200ms ease; }
 .sheet-mask { position: fixed; inset: 0; z-index: 10; background: rgba(0, 0, 0, .58); animation: mask-in 220ms ease both; }
 .token-sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 11; padding: 18rpx 32rpx calc(36rpx + env(safe-area-inset-bottom)); border: 1rpx solid #443740; border-bottom: 0; border-radius: 36rpx 36rpx 0 0; background: #19171d; box-shadow: 0 -16rpx 80rpx rgba(0, 0, 0, .5); animation: sheet-in 320ms ease-out both; }
