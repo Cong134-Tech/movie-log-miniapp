@@ -1,13 +1,13 @@
-page { background: #09090b; color: #f5f3ef; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 28rpx; }
+page { min-height: 100%; background: #09090b !important; background-color: #09090b !important; color: #f5f3ef; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 28rpx; }
 view, button, input, textarea { box-sizing: border-box; }
 button { font-weight: 500; min-width: 0; }
 button::after { border: 0; }
 button[disabled] { background: #242429 !important; color: #777780 !important; }
-.page-shell { padding: 40rpx 32rpx 56rpx; min-height: 100vh; }
-.page-enter { animation: focus-in 480ms ease-out both; }
+.page-shell { padding: 40rpx 32rpx 56rpx; min-height: 100vh; background-color: #09090b; }
+.page-enter { animation: focus-in 240ms ease-out both; }
 @keyframes focus-in {
-  from { opacity: .25; filter: blur(9px); transform: translateY(12rpx); }
-  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+  from { opacity: .96; transform: translateY(3rpx); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .eyebrow { color: #ff5b62; font-size: 20rpx; letter-spacing: 4rpx; font-weight: 600; }
 .page-title { font-size: 66rpx; line-height: 1.2; letter-spacing: -2rpx; font-weight: 700; margin: 22rpx 0 18rpx; }
