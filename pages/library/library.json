@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "我的片库",
+  "backgroundColor": "#09090b",
+  "backgroundTextStyle": "dark",
   "usingComponents": {}
 }

@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "观影统计",
+  "backgroundColor": "#09090b",
+  "backgroundTextStyle": "dark",
   "usingComponents": {}
 }

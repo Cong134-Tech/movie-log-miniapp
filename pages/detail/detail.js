@@ -1,6 +1,7 @@
 const { addViewing, getMovieCount } = require('../../utils/movies')
 const tmdb = require('../../utils/tmdb')
 const { revealPage, FALLBACK_POSTER } = require('../../utils/ui')
+const cloud = require('../../utils/cloud')
 
 function todayLocal() {
   const date = new Date()
@@ -13,12 +14,20 @@ Page({
     const movie = JSON.parse(decodeURIComponent(options.movie || '{}'))
     this.setData({ movie, watchCount: getMovieCount(movie.id), watchedAt: todayLocal() })
     const token = wx.getStorageSync('tmdb-token')
-    if (token && movie.tmdbId && (!movie.director || !movie.cast || !movie.cast.length)) this.loadFull(movie.tmdbId, token)
+    if ((token || cloud.isEnabled()) && movie.tmdbId && (!movie.director || !movie.cast || !movie.cast.length)) this.loadFull(movie.tmdbId, token)
+    else if (cloud.isEnabled() && movie.tmdbId && movie.posterPath) this.loadPoster(movie)
   },
   onShow() { revealPage(this) },
   async loadFull(id, token) {
     this.setData({ loading: true })
-    try { this.setData({ movie: await tmdb.getMovie(id, token), loading: false }) } catch (error) { this.setData({ loading: false }) }
+    try {
+      let movie = await tmdb.getMovie(id, token)
+      if (cloud.isEnabled()) movie = await tmdb.loadPoster(movie).catch(() => movie)
+      this.setData({ movie, loading: false })
+    } catch (error) { this.setData({ loading: false }) }
+  },
+  async loadPoster(movie) {
+    try { this.setData({ movie: await tmdb.loadPoster(movie) }) } catch (error) {}
   },
   onPosterError() {
     if (this.data.movie.poster !== FALLBACK_POSTER) this.setData({ 'movie.poster': FALLBACK_POSTER })

@@ -1,9 +1,11 @@
 const { distinctMovies, getRecords } = require('../../utils/movies')
-const { revealPage, FALLBACK_POSTER } = require('../../utils/ui')
+const { FALLBACK_POSTER } = require('../../utils/ui')
+const tmdb = require('../../utils/tmdb')
+const cloud = require('../../utils/cloud')
 
 Page({
   data: { movies: [], countries: [], filter: '', filterOpen: false, totalCount: 0, totalViews: 0, revealing: false },
-  onShow() { this.refresh(); revealPage(this) },
+  onShow() { this.refresh() },
   refresh() {
     const all = distinctMovies()
     const countries = [...new Set(all.reduce((list, movie) => list.concat(movie.countries || []), []))]
@@ -19,6 +21,17 @@ Page({
     const id = event.currentTarget.dataset.id
     const movie = this.data.movies.find(item => item.id === id)
     if (!movie || movie.poster === FALLBACK_POSTER) return
+    if (cloud.isEnabled() && movie.posterPath) {
+      this.posterLoads = this.posterLoads || new Set()
+      if (this.posterLoads.has(id)) return
+      this.posterLoads.add(id)
+      tmdb.loadPoster(movie).then(updated => {
+        this.setData({ movies: this.data.movies.map(item => item.id === id ? { ...item, poster: updated.poster } : item) })
+      }).catch(() => {
+        this.setData({ movies: this.data.movies.map(item => item.id === id ? { ...item, poster: FALLBACK_POSTER } : item) })
+      }).finally(() => this.posterLoads.delete(id))
+      return
+    }
     this.setData({ movies: this.data.movies.map(item => item.id === id ? { ...item, poster: FALLBACK_POSTER } : item) })
   },
   goDiscover() { wx.switchTab({ url: '/pages/home/home' }) },

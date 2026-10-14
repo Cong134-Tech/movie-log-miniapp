@@ -1,5 +1,7 @@
 const { getRecords, distinctMovies } = require('../../utils/movies')
-const { revealPage, FALLBACK_POSTER } = require('../../utils/ui')
+const { FALLBACK_POSTER } = require('../../utils/ui')
+const tmdb = require('../../utils/tmdb')
+const cloud = require('../../utils/cloud')
 
 Page({
   data: { movieCount: 0, viewCount: 0, countries: [], latest: [], tokenConfigured: false, tokenSheetVisible: false, tokenDraft: '', tokenError: '', revealing: false },
@@ -14,9 +16,8 @@ Page({
     this.setData({
       movieCount: movies.length, viewCount: records.length,
       countries: Object.keys(byCountry).map(name => ({ name, count: byCountry[name], percent: Math.round(byCountry[name] / movies.length * 100) })).sort((a, b) => b.count - a.count),
-      latest: records.slice(0, 5), tokenConfigured: Boolean(wx.getStorageSync('tmdb-token'))
+      latest: records.slice(0, 5), tokenConfigured: Boolean(wx.getStorageSync('tmdb-token') || cloud.isEnabled())
     })
-    revealPage(this)
   },
   onHide() { if (this.data.tokenSheetVisible) this.closeTokenSheet() },
   onUnload() { if (this.data.tokenSheetVisible) wx.showTabBar({ animation: false }) },
@@ -42,6 +43,17 @@ Page({
     const id = event.currentTarget.dataset.id
     const record = this.data.latest.find(item => item.movie.id === id)
     if (!record || record.movie.poster === FALLBACK_POSTER) return
+    if (cloud.isEnabled() && record.movie.posterPath) {
+      this.posterLoads = this.posterLoads || new Set()
+      if (this.posterLoads.has(id)) return
+      this.posterLoads.add(id)
+      tmdb.loadPoster(record.movie).then(updated => {
+        this.setData({ latest: this.data.latest.map(item => item.movie.id === id ? { ...item, movie: { ...item.movie, poster: updated.poster } } : item) })
+      }).catch(() => {
+        this.setData({ latest: this.data.latest.map(item => item.movie.id === id ? { ...item, movie: { ...item.movie, poster: FALLBACK_POSTER } } : item) })
+      }).finally(() => this.posterLoads.delete(id))
+      return
+    }
     this.setData({ latest: this.data.latest.map(item => item.movie.id === id ? { ...item, movie: { ...item.movie, poster: FALLBACK_POSTER } } : item) })
   },
   openDetail(event) {

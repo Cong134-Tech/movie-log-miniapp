@@ -1,8 +1,10 @@
 {
   "description": "我的观影手账",
+  "cloudfunctionRoot": "cloudfunctions/",
   "packOptions": {
     "ignore": [
       { "type": "folder", "value": "assets/source" },
+      { "type": "file", "value": "assets/logo-appicon.png" },
       { "type": "file", "value": "assets/poster-placeholder.svg" },
       { "type": "file", "value": "README.md" }
     ]

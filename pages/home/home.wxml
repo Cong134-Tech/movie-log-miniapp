@@ -1,5 +1,5 @@
 <view class="page-shell {{revealing ? 'page-enter' : ''}}">
-  <view class="brand-row"><view class="eyebrow">CINEMA / PERSONAL JOURNAL</view><view class="brand-dot"></view></view>
+  <view class="brand-row"><view class="brand-lockup"><image class="brand-logo" src="/assets/logo.png" mode="aspectFit" /><view class="eyebrow">CINEMA / PERSONAL JOURNAL</view></view><view class="brand-dot"></view></view>
   <view class="page-title">每一部，<view>都值得记住。</view></view>
   <view class="muted">找到一部电影，留下你的观看记忆。</view>
   <view class="search-box">

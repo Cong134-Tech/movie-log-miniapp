@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "发现电影",
+  "backgroundColor": "#09090b",
+  "backgroundTextStyle": "dark",
   "usingComponents": {}
 }
