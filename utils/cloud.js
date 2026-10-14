@@ -1,6 +1,6 @@
 // Fill this with the CloudBase environment ID after creating a cloud environment.
 // Leave it empty to keep the local/direct TMDB fallback while developing.
-const CLOUD_ENV_ID = ''
+const CLOUD_ENV_ID = 'movie-log-d9gm1e59441d5f6e4'
 const CLOUD_FUNCTION = 'tmdbProxy'
 
 function isEnabled() {
@@ -44,3 +44,4 @@ function cachePoster(movieId, posterPath) {
 }
 
 module.exports = { CLOUD_ENV_ID, isEnabled, call, cachePoster }
+
