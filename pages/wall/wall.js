@@ -19,7 +19,23 @@ function toWallMovies(records) {
 Page({
   data: { movies: [], revealing: false },
   onShow() { this.refresh() },
-  refresh() { this.setData({ movies: toWallMovies(getRecords()) }) },
+  refresh() {
+    const movies = toWallMovies(getRecords())
+    this.setData({ movies })
+    this.hydratePosters(movies)
+  },
+  async hydratePosters(movies) {
+    if (!cloud.isEnabled() || !movies.length) return
+    const updates = await Promise.all(movies.map(async movie => {
+      if (!movie.tmdbId) return movie
+      try {
+        const detail = await tmdb.getMovie(movie.tmdbId)
+        const hydrated = await tmdb.loadPoster(detail)
+        return { ...movie, ...hydrated, id: movie.id, watchCount: movie.watchCount, lastWatchedAt: movie.lastWatchedAt }
+      } catch (error) { return movie }
+    }))
+    this.setData({ movies: updates })
+  },
   onPosterError(event) {
     const id = event.currentTarget.dataset.id
     const movie = this.data.movies.find(item => item.id === id)

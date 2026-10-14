@@ -12,7 +12,7 @@
     <view class="country-note">合拍电影会分别计入各制片国家或地区。</view>
   </view>
   <view wx:else class="panel empty"><image class="empty-icon" src="/assets/icons/globe.png" /><view class="empty-title">统计会在这里出现</view><view>从第一部电影开始，点亮你的光影地图。</view></view>
-  <view wx:if="{{latest.length}}" class="section-head section-head-link" bindtap="openWall"><view class="section-title">最近观看</view><view class="section-action">查看全部 ›</view></view>
+  <view wx:if="{{latest.length}}" class="section-head section-head-link" catchtap="openWall"><view class="section-title">最近观看</view><view class="section-action recent-link" catchtap="openWall">查看全部 ›</view></view>
   <view wx:if="{{latest.length}}" class="panel latest-list"><view class="latest-row" wx:for="{{latest}}" wx:key="id" data-movie="{{item.movie}}" bindtap="openDetail"><image class="latest-poster" mode="aspectFill" src="{{item.movie.poster || '/assets/poster-placeholder.png'}}" binderror="onPosterError" data-id="{{item.movie.id}}" /><view class="latest-copy"><view class="latest-name">{{item.movie.title}}</view><view class="movie-meta">{{item.watchedAt}}</view></view><view class="latest-index">{{index + 1 < 10 ? '0' + (index + 1) : index + 1}}</view></view></view>
   <view class="section-head"><view class="section-title">管理手账</view></view>
   <view class="panel settings-panel">

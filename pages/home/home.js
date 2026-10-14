@@ -20,11 +20,26 @@ Page({
     const onlineEnabled = Boolean(token || cloud.isEnabled())
     try {
       const results = onlineEnabled && query ? await tmdb.searchMovies(query, token) : searchLocal(query)
-      this.setData({ results: results.map(movie => ({ ...movie, watchCount: getMovieCount(movie.id) })), loading: false, usingDemo: !(onlineEnabled && query), tokenConfigured: onlineEnabled })
+      const nextResults = results.map(movie => ({ ...movie, watchCount: getMovieCount(movie.id) }))
+      const usingDemo = !(onlineEnabled && query)
+      this.setData({ results: nextResults, loading: false, usingDemo, tokenConfigured: onlineEnabled })
+      this.hydratePosters(nextResults)
     } catch (error) {
       this.setData({ results: searchLocal(query).map(movie => ({ ...movie, watchCount: getMovieCount(movie.id) })), loading: false, usingDemo: true })
       wx.showToast({ title: '真实搜索暂不可用，已切换示例', icon: 'none' })
     }
+  },
+  async hydratePosters(movies) {
+    if (!cloud.isEnabled() || !movies.length) return
+    const updates = await Promise.all(movies.map(async movie => {
+      if (!movie.tmdbId) return movie
+      try {
+        const detail = await tmdb.getMovie(movie.tmdbId)
+        const hydrated = await tmdb.loadPoster(detail)
+        return { ...movie, ...hydrated, id: movie.id, watchCount: getMovieCount(movie.id) }
+      } catch (error) { return movie }
+    }))
+    if (updates.some((movie, index) => movie.poster !== movies[index].poster || movie.title !== movies[index].title)) this.setData({ results: updates })
   },
   onPosterError(event) {
     const id = event.currentTarget.dataset.id

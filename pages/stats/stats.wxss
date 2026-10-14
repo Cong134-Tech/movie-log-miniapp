@@ -13,6 +13,9 @@
 .country-fill { height: 100%; min-width: 6rpx; border-radius: 999rpx; background: linear-gradient(90deg, #b52c49, #f17782); transition: width 450ms ease; }
 .country-note { border-top: 1rpx solid #302b34; padding-top: 18rpx; color: #746c7f; font-size: 20rpx; line-height: 1.6; }
 .latest-list { padding: 6rpx 24rpx; }
+.section-head-link { padding: 12rpx 14rpx; margin-left: -14rpx; margin-right: -14rpx; border-radius: 16rpx; transition: background-color 180ms ease; }
+.section-head-link:active { background: #17151a; }
+.recent-link { color: #ff7883; }
 .latest-row { display: flex; align-items: center; gap: 20rpx; padding: 22rpx 0; border-bottom: 1rpx solid #2b2730; }
 .latest-row:last-child { border-bottom: 0; }
 .latest-poster { width: 72rpx; height: 108rpx; background: #252129; border-radius: 10rpx; flex-shrink: 0; }

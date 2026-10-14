@@ -13,11 +13,25 @@ Page({
       const countries = Array.isArray(movie.countries) && movie.countries.length ? [...new Set(movie.countries)] : ['未分类']
       countries.forEach(country => { byCountry[country] = (byCountry[country] || 0) + 1 })
     })
+    const latest = records.slice(0, 5)
     this.setData({
       movieCount: movies.length, viewCount: records.length,
       countries: Object.keys(byCountry).map(name => ({ name, count: byCountry[name], percent: Math.round(byCountry[name] / movies.length * 100) })).sort((a, b) => b.count - a.count),
-      latest: records.slice(0, 5), tokenConfigured: Boolean(wx.getStorageSync('tmdb-token') || cloud.isEnabled())
+      latest, tokenConfigured: Boolean(wx.getStorageSync('tmdb-token') || cloud.isEnabled())
     })
+    this.hydrateLatest(latest)
+  },
+  async hydrateLatest(records) {
+    if (!cloud.isEnabled() || !records.length) return
+    const updates = await Promise.all(records.map(async record => {
+      if (!record.movie || !record.movie.tmdbId) return record
+      try {
+        const detail = await tmdb.getMovie(record.movie.tmdbId)
+        const movie = await tmdb.loadPoster(detail)
+        return { ...record, movie: { ...record.movie, ...movie, id: record.movie.id } }
+      } catch (error) { return record }
+    }))
+    this.setData({ latest: updates })
   },
   onHide() { if (this.data.tokenSheetVisible) this.closeTokenSheet() },
   onUnload() { if (this.data.tokenSheetVisible) wx.showTabBar({ animation: false }) },
@@ -61,7 +75,10 @@ Page({
     wx.navigateTo({ url: `/pages/detail/detail?movie=${movie}` })
   },
   openWall() {
-    wx.navigateTo({ url: '/pages/wall/wall' })
+    wx.navigateTo({
+      url: '/pages/wall/wall',
+      fail: () => wx.showToast({ title: '请先重新编译当前版本', icon: 'none' })
+    })
   },
   exportRecords() {
     const records = getRecords()
