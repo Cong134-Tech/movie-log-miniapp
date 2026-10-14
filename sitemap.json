@@ -1,0 +1,4 @@
+{
+  "desc": "我的观影手账",
+  "rules": [{ "action": "allow", "page": "*" }]
+}

@@ -1,0 +1,12 @@
+.hero-poster { width: 100%; height: 520rpx; border-radius: 18rpx; background: #d9dee4; }
+.detail-title { font-size: 48rpx; font-weight: 800; margin-top: 26rpx; }
+.original-title, .meta-line { color: #7d8792; font-size: 24rpx; margin-top: 10rpx; }
+.tag-line { margin-top: 18rpx; }
+.overview { font-size: 27rpx; line-height: 1.75; color: #44505d; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18rpx; margin-top: 18rpx; }
+.info-label, .field-label { color: #8a949d; font-size: 23rpx; margin-bottom: 10rpx; }
+.info-value { font-size: 26rpx; line-height: 1.5; }
+.form-panel textarea { width: 100%; min-height: 160rpx; box-sizing: border-box; background: #f6f7f8; border-radius: 10rpx; padding: 18rpx; font-size: 25rpx; margin-bottom: 20rpx; }
+.date-picker { background: #f6f7f8; border-radius: 10rpx; padding: 20rpx; margin-bottom: 24rpx; color: #303b47; }
+.record-button { line-height: 82rpx; }
+.tmdb-credit { text-align: center; color: #9aa3ab; font-size: 21rpx; margin-top: 28rpx; }

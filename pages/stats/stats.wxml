@@ -1,0 +1,15 @@
+<view class="page-shell">
+  <view class="eyebrow">YOUR WATCHING YEAR</view>
+  <view class="page-title">看过多少？</view>
+  <view class="stat-grid">
+    <view class="stat-card"><view class="stat-number">{{movieCount}}</view><view class="stat-label">部电影</view></view>
+    <view class="stat-card accent"><view class="stat-number">{{viewCount}}</view><view class="stat-label">次观看</view></view>
+  </view>
+  <view class="section-head"><view class="section-title">按国家或地区</view><view><button class="export-btn" bindtap="configureToken">配置 TMDB</button><button class="export-btn export-gap" bindtap="exportRecords">导出记录</button></view></view>
+  <view wx:if="{{countries.length}}" class="panel country-list">
+    <view class="country-row" wx:for="{{countries}}" wx:key="name"><view>{{item.name}}</view><view class="country-count">{{item.count}} 部</view></view>
+  </view>
+  <view wx:else class="panel empty"><view class="empty-title">统计会在这里出现</view><view>标记第一部看过的电影吧。</view></view>
+  <view wx:if="{{latest.length}}" class="section-head"><view class="section-title">最近观看</view></view>
+  <view wx:if="{{latest.length}}" class="panel latest-list"><view class="latest-row" wx:for="{{latest}}" wx:key="id"><view><view class="latest-name">{{item.movie.title}}</view><view class="movie-meta">{{item.watchedAt}}</view></view><view class="pill">已记录</view></view></view>
+</view>

@@ -1,0 +1,15 @@
+{
+  "description": "我的观影手账",
+  "packOptions": { "ignore": [] },
+  "setting": {
+    "es6": true,
+    "minified": true,
+    "urlCheck": false,
+    "compileHotReLoad": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "3.8.8",
+  "appid": "touristappid",
+  "projectname": "movie-log-miniapp",
+  "condition": {}
+}

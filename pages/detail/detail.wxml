@@ -1,0 +1,25 @@
+<view class="page-shell detail-page">
+  <image class="hero-poster" mode="aspectFill" src="{{movie.poster}}" />
+  <view class="detail-title">{{movie.title}}</view>
+  <view class="original-title">{{movie.originalTitle}}</view>
+  <view class="meta-line">{{movie.year || '年份待补充'}} · {{movie.countryLabel || '国家待补充'}}</view>
+  <view class="tag-line" wx:if="{{watchCount}}"><text class="pill">已看 {{watchCount}} 次</text></view>
+
+  <view class="section-head"><view class="section-title">剧情简介</view></view>
+  <view class="panel overview">{{movie.overview || '暂无剧情简介'}}</view>
+
+  <view class="info-grid">
+    <view class="panel"><view class="info-label">导演</view><view class="info-value">{{movie.director || '暂无资料'}}</view></view>
+    <view class="panel"><view class="info-label">主演</view><view class="info-value">{{movie.castLabel || '暂无资料'}}</view></view>
+  </view>
+
+  <view class="section-head"><view class="section-title">记录一次观看</view></view>
+  <view class="panel form-panel">
+    <view class="field-label">观看日期</view>
+    <picker mode="date" value="{{watchedAt}}" bindchange="onDateChange"><view class="date-picker">{{watchedAt}}</view></picker>
+    <view class="field-label">观影感想（选填）</view>
+    <textarea value="{{note}}" placeholder="写下这一遍留下的印象" bindinput="onNoteInput" maxlength="500" />
+    <button class="primary-btn record-button" bindtap="markWatched">记录这次观看</button>
+  </view>
+  <view class="tmdb-credit" wx:if="{{movie.tmdbId}}">电影资料来自 TMDB</view>
+</view>

@@ -1,0 +1,28 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/library/library",
+    "pages/stats/stats",
+    "pages/detail/detail"
+  ],
+  "window": {
+    "navigationBarTitleText": "我的观影手账",
+    "navigationBarBackgroundColor": "#10161f",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f4f6f8",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#84909f",
+    "selectedColor": "#d95f59",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/home/home", "text": "发现" },
+      { "pagePath": "pages/library/library", "text": "片库" },
+      { "pagePath": "pages/stats/stats", "text": "统计" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

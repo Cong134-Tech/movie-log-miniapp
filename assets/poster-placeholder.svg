@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <rect width="600" height="900" fill="#17202b"/>
+  <rect x="42" y="42" width="516" height="816" rx="18" fill="#263342" stroke="#d95f59" stroke-width="4"/>
+  <circle cx="300" cy="330" r="86" fill="#d95f59" opacity=".92"/>
+  <path d="M270 270 L270 390 L370 330 Z" fill="#ffffff"/>
+  <text x="300" y="540" fill="#ffffff" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700">MOVIE LOG</text>
+  <text x="300" y="590" fill="#aeb9c4" text-anchor="middle" font-family="Arial, sans-serif" font-size="22">PERSONAL DIARY</text>
+</svg>

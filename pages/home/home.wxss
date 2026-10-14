@@ -1,0 +1,6 @@
+.search-box { display: flex; gap: 14rpx; margin-top: 34rpx; background: #fff; padding: 10rpx 10rpx 10rpx 24rpx; border-radius: 14rpx; box-shadow: 0 12rpx 30rpx rgba(20,30,40,.06); }
+.search-box input { flex: 1; height: 74rpx; font-size: 27rpx; }
+.search-button { width: 132rpx; margin: 0; padding: 0; line-height: 74rpx; background: #17202b; color: #fff; border-radius: 10rpx; font-size: 26rpx; }
+.demo-note { margin-top: 18rpx; color: #9a6a42; background: #fff4e8; padding: 14rpx 18rpx; border-radius: 10rpx; font-size: 22rpx; }
+.mark-button { margin: 14rpx 0 0; width: 100%; padding: 0; line-height: 58rpx; background: #f5e9e6; color: #b14f49; border-radius: 9rpx; font-size: 23rpx; }
+.loading { color: #7d8792; text-align: center; }

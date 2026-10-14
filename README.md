@@ -28,6 +28,16 @@ Required attribution when TMDB data is used:
 
 > This product uses the TMDB API but is not endorsed or certified by TMDB.
 
+## Run locally in WeChat Developer Tools
+
+1. Download or clone this repository.
+2. Open `C:\Users\从子铭\Documents\Codex\2026-10-13\ni\outputs\movie-log-miniapp` in WeChat Developer Tools.
+3. Replace `touristappid` in `project.config.json` with your own WeChat Mini Program AppID.
+4. For a personal test build, open the **统计** tab, tap **配置 TMDB**, and paste your TMDB API Read Access Token. The token is stored only in the local mini-program storage and is not committed to GitHub.
+5. For a published build, move TMDB requests into a cloud function or server before release. Direct client-side tokens are suitable only for personal development.
+
+The project works without a token using four local sample films. With a token, search and detail pages request current movie data from TMDB. WeChat production builds also require `api.themoviedb.org` and `image.tmdb.org` to be added to the Mini Program request and download domain allowlists.
+
 ## 中文介绍
 
 “我的观影手账”是一款正在开发中的微信小程序，供本人记录看过的电影及重看次数。计划支持电影搜索、海报、导演与主演、剧情梗概、按制片国家或地区分类，以及观影统计和备份导出。

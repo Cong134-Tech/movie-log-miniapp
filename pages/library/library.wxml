@@ -1,0 +1,14 @@
+<view class="page-shell">
+  <view class="eyebrow">MY LIBRARY</view>
+  <view class="page-title">我的片库</view>
+  <view class="library-toolbar"><view class="muted">按国家或地区整理你的观看记录</view><button class="filter-btn" bindtap="chooseFilter">{{filter || '筛选'}}</button></view>
+  <view wx:if="{{movies.length}}" class="grid library-grid">
+    <view class="movie-card" wx:for="{{movies}}" wx:key="id" data-movie="{{item}}" bindtap="openDetail">
+      <image class="poster" mode="aspectFill" src="{{item.poster}}" />
+      <view class="movie-name">{{item.title}}</view>
+      <view class="movie-meta">{{item.year}} · {{item.countryLabel}}</view>
+      <view class="watch-count">看过 {{item.watchCount}} 次</view>
+    </view>
+  </view>
+  <view wx:else class="panel empty"><view class="empty-title">片库还空着</view><view>在“发现”里找到电影并标记看过。</view></view>
+</view>
