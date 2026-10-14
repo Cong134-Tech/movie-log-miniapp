@@ -29,7 +29,12 @@ Page({
         const detail = await tmdb.getMovie(record.movie.tmdbId)
         const movie = await tmdb.loadPoster(detail)
         return { ...record, movie: { ...record.movie, ...movie, id: record.movie.id } }
-      } catch (error) { return record }
+      } catch (error) {
+        try {
+          const movie = await tmdb.getMovie(record.movie.tmdbId)
+          return { ...record, movie: { ...record.movie, ...movie, id: record.movie.id } }
+        } catch (fallbackError) { return record }
+      }
     }))
     this.setData({ latest: updates })
   },

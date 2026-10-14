@@ -32,7 +32,12 @@ Page({
         const detail = await tmdb.getMovie(movie.tmdbId)
         const hydrated = await tmdb.loadPoster(detail)
         return { ...movie, ...hydrated, id: movie.id, watchCount: movie.watchCount, lastWatchedAt: movie.lastWatchedAt }
-      } catch (error) { return movie }
+      } catch (error) {
+        try {
+          const detail = await tmdb.getMovie(movie.tmdbId)
+          return { ...movie, ...detail, id: movie.id, watchCount: movie.watchCount, lastWatchedAt: movie.lastWatchedAt }
+        } catch (fallbackError) { return movie }
+      }
     }))
     this.setData({ movies: updates })
   },
