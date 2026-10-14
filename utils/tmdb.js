@@ -1,5 +1,6 @@
 const API_BASE = 'https://api.themoviedb.org/3'
 const IMAGE_BASE = 'https://image.tmdb.org/t/p/w500'
+const { FALLBACK_POSTER } = require('./ui')
 
 function request(path, token, data = {}) {
   return new Promise((resolve, reject) => {
@@ -24,7 +25,7 @@ function normalize(movie) {
     director: '',
     cast: [],
     overview: movie.overview || '暂无剧情简介',
-    poster: movie.poster_path ? `${IMAGE_BASE}${movie.poster_path}` : ''
+    poster: movie.poster_path ? `${IMAGE_BASE}${movie.poster_path}` : FALLBACK_POSTER
   }
   normalized.countryLabel = normalized.countries.join(' / ')
   normalized.castLabel = normalized.cast.join('、')

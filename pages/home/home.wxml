@@ -1,23 +1,29 @@
-<view class="page-shell">
-  <view class="eyebrow">PRIVATE MOVIE DIARY</view>
-  <view class="page-title">今天想起哪部电影？</view>
-  <view class="muted">找到它，记下这一场观看。</view>
-
+<view class="page-shell {{revealing ? 'page-enter' : ''}}">
+  <view class="brand-row"><view class="eyebrow">CINEMA / PERSONAL JOURNAL</view><view class="brand-dot"></view></view>
+  <view class="page-title">每一部，<view>都值得记住。</view></view>
+  <view class="muted">找到一部电影，留下你的观看记忆。</view>
   <view class="search-box">
-    <input value="{{query}}" placeholder="搜索片名、导演或主演" confirm-type="search" bindinput="onInput" bindconfirm="search" />
-    <button class="search-button" bindtap="search">搜索</button>
+    <image class="search-icon" src="/assets/icons/search.png" />
+    <input value="{{query}}" placeholder="片名、导演或主演" placeholder-class="input-placeholder" confirm-type="search" bindinput="onInput" bindconfirm="search" />
+    <button class="search-button" bindtap="search" loading="{{loading}}" disabled="{{loading}}">搜索</button>
   </view>
-
-  <view wx:if="{{usingDemo}}" class="demo-note">示例模式 · 配置 TMDB Token 后可搜索完整电影资料</view>
-  <view class="section-head"><view class="section-title">电影结果</view><view class="section-action">{{results.length}} 部</view></view>
-  <view wx:if="{{loading}}" class="panel loading">正在查找电影…</view>
+  <view wx:if="{{usingDemo}}" class="demo-note"><view class="status-dot"></view><text>{{tokenConfigured ? '示例片目 · 搜索片名获取真实资料' : '示例片目 · 可在「统计」连接电影资料'}}</text></view>
+  <view class="section-head"><view class="section-title">{{usingDemo ? '从这里开始' : '搜索结果'}}</view><view class="section-action">{{results.length}} 部电影</view></view>
+  <view wx:if="{{loading}}" class="panel loading"><view class="loading-orbit"></view><view>正在寻找电影…</view></view>
   <view wx:elif="{{results.length}}" class="grid">
     <view class="movie-card" wx:for="{{results}}" wx:key="id" data-movie="{{item}}" bindtap="openDetail">
-      <image class="poster small" mode="aspectFill" src="{{item.poster}}" />
-      <view class="movie-name">{{item.title}}</view>
-      <view class="movie-meta">{{item.year}} · {{item.countryLabel || '国家待补充'}}</view>
-      <button class="mark-button" catchtap="markWatched" data-movie="{{item}}">{{item.watchCount ? '看过 ' + item.watchCount + ' 次' : '标记看过'}}</button>
+      <view class="poster-frame">
+        <image class="poster" mode="aspectFill" src="{{item.poster || '/assets/poster-placeholder.png'}}" binderror="onPosterError" data-id="{{item.id}}" />
+        <view class="poster-shade"></view><view class="poster-year">{{item.year}}</view>
+        <view wx:if="{{item.watchCount}}" class="poster-badge">{{item.watchCount}} 次</view>
+      </view>
+      <view class="card-copy">
+        <view class="movie-name">{{item.title}}</view>
+        <view class="movie-meta">{{item.countryLabel || item.originalTitle || '国家待补充'}}</view>
+        <button class="mark-button {{item.watchCount ? 'is-watched' : ''}}" catchtap="markWatched" data-movie="{{item}}"><text class="mark-symbol">{{item.watchCount ? '✓' : '+'}}</text>{{item.watchCount ? '再看一次' : '标记看过'}}</button>
+      </view>
     </view>
   </view>
-  <view wx:else class="panel empty"><view class="empty-title">没有找到电影</view><view>换一个片名试试。</view></view>
+  <view wx:else class="panel empty"><image class="empty-icon" src="/assets/icons/search.png" /><view class="empty-title">还没找到这部电影</view><view>试试另一个片名，或它的原名。</view></view>
+  <view class="footer-note">A LIFE IN FILMS</view>
 </view>

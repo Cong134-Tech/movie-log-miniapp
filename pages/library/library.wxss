@@ -1,3 +1,12 @@
-.library-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 20rpx; margin: 26rpx 0 34rpx; }
-.filter-btn { margin: 0; padding: 0 22rpx; height: 58rpx; line-height: 58rpx; color: #b14f49; background: #f5e9e6; border-radius: 9rpx; font-size: 23rpx; }
-.library-grid .poster { height: 330rpx; }
+.library-summary { display: flex; align-items: flex-end; justify-content: space-between; gap: 16rpx; margin-top: 32rpx; padding: 28rpx 30rpx; }
+.summary-number { color: #f5f3ef; font-size: 60rpx; font-weight: 600; letter-spacing: -2rpx; line-height: 1; }
+.summary-unit { color: #b3aebb; font-size: 25rpx; margin-left: 12rpx; }
+.summary-caption { color: #ff7c86; font-size: 23rpx; padding-bottom: 5rpx; }
+button.filter-btn { display: flex; align-items: center; gap: 12rpx; margin: 0; padding: 0 20rpx; width: auto; height: 62rpx; line-height: 62rpx; color: #aaa4b4; background: #1b1b20; border: 1rpx solid #333039; border-radius: 999rpx; font-size: 22rpx; flex-shrink: 0; }
+.filter-btn text { font-size: 28rpx; color: #ff7b88; }
+.filter-btn.active { border-color: #71323f; color: #efc5ce; }
+.filter-panel { display: flex; flex-wrap: wrap; gap: 14rpx; margin-bottom: 24rpx; padding: 22rpx; }
+.filter-chip { padding: 12rpx 20rpx; border: 1rpx solid #3a353f; border-radius: 999rpx; font-size: 23rpx; color: #b7aebb; }
+.filter-chip.selected { background: #44212e; border-color: #84374b; color: #ff98a1; }
+.filter-hint { width: 100%; color: #817b89; font-size: 22rpx; line-height: 1.7; }
+.watch-check { float: right; color: #8d6f7d; }

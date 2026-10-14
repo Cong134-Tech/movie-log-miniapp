@@ -1,47 +1,48 @@
-# My Private Movie Log · 我的观影手账
+# 我的观影手账 · My Private Movie Log
 
-A personal, non-commercial WeChat Mini Program for keeping a private movie diary.
+一个供个人使用的微信小程序，记录看过的电影、重看次数和每次观看的日期与感想。项目已可在微信开发者工具中运行，尚未发布上线。
 
-## Project status
+## 当前功能
 
-This project is currently in development. This repository provides the project introduction; a working Mini Program has not been published yet.
+- 发现：未配置接口时体验四部示例电影；连接 TMDB 后按片名搜索电影资料。
+- 详情：竖版海报、导演、主演、剧情简介、制片国家或地区，支持记录观看日期与感想。
+- 片库：汇总看过的电影、展示重看次数，支持按国家或地区筛选。
+- 统计：分别统计电影部数和观看次数，展示国家分布与最近观看记录。
+- 管理：更新 TMDB 凭证，将观看记录复制为 JSON 备份。
 
-## Planned features
+同一部电影看三遍，统计为 **1 部电影、3 次观看**。合拍片会分别计入各制片国家或地区，因此国家分类的数量之和可能超过电影总数。
 
-- Search for films by Chinese or original title.
-- View movie posters, directors, cast, plot summaries, release years, and production countries or regions.
-- Mark movies as watched and keep a separate entry for each viewing.
-- Record repeat viewings, with optional viewing dates, personal ratings, and notes.
-- Browse a personal movie library and filter by country or region.
-- Count distinct films separately from total viewings.
-- Export personal viewing records for backup.
+## 界面设计
 
-## Intended use
+四个页面统一采用黑底白字、红色渐变点缀、分层字号、圆角卡片与阴影。片库海报按 2:3 比例展示；页面内容采用从模糊到清晰的入场动画，配置弹窗带背景模糊。
 
-The app is intended only for its owner's personal use. There are no planned advertisements, paid features, or public social functions. Viewing records are intended to remain private.
+示例封面为本项目绘制的几何插画，不是官方电影海报。连接 TMDB 后，搜索结果使用接口返回的电影海报。图标和封面的可编辑 SVG 源文件位于 `assets/source/`，小程序加载对应的 PNG 文件。
 
-## Movie data
+## 本地体验
 
-Movie information is planned to come from The Movie Database (TMDB), subject to API access and applicable terms. TMDB integration is not yet configured. API credentials will be stored on the server and will not be committed to this public repository.
+1. 克隆或下载项目，用微信开发者工具导入项目根目录。
+2. 在 `project.config.json` 中填写自己的小程序 AppID。
+3. 编译后即可体验示例电影、记录观看和查看统计，无需先配置接口。
+4. 准备好 TMDB API Read Access Token 后，在「统计 → 配置 TMDB」粘贴并保存，再到「发现」搜索片名。
 
-Required attribution when TMDB data is used:
+本地开发配置关闭了域名校验。真实接口与海报在手机上的访问仍需结合网络环境、小程序后台的合法域名配置进行验证。当前 UI 和记录功能已在开发者工具模拟器中检查；未配置真实凭证时不代表真实接口已验证。
+
+## 数据与后续维护
+
+- `utils/tmdb.js`：电影搜索、详情请求、数据字段转换和海报地址；后续更换接口或接入服务端，可在这里维护。
+- `utils/movies.js`：本地示例、观看记录读写和汇总。
+- `utils/ui.js`：页面入场动画触发和海报兜底资源。
+- `app.wxss`：全局配色、文字、卡片和海报样式。
+- `pages/`：发现、片库、统计、详情四个页面。
+
+当前版本从接口实时请求搜索与详情资料，不需要将整个电影库内置到项目。搜索目前返回接口的第一页结果。
+
+观看记录与 TMDB 凭证保存在当前小程序的本地存储中，没有跨设备云同步；清理小程序数据会移除本地内容。请按需导出备份。凭证不写入项目源文件；公开发布前应将接口调用迁移到服务端或云函数，避免在客户端分发凭证。
+
+## 用途与资料来源
+
+本项目用于个人非商业观影记录，无广告、付费功能或公开社交功能。电影资料由 The Movie Database (TMDB) 提供，实际使用受其接口条款约束。
 
 > This product uses the TMDB API but is not endorsed or certified by TMDB.
 
-## Run locally in WeChat Developer Tools
-
-1. Download or clone this repository.
-2. Open `C:\Users\从子铭\Documents\Codex\2026-10-13\ni\outputs\movie-log-miniapp` in WeChat Developer Tools.
-3. Replace `touristappid` in `project.config.json` with your own WeChat Mini Program AppID.
-4. For a personal test build, open the **统计** tab, tap **配置 TMDB**, and paste your TMDB API Read Access Token. The token is stored only in the local mini-program storage and is not committed to GitHub.
-5. For a published build, move TMDB requests into a cloud function or server before release. Direct client-side tokens are suitable only for personal development.
-
-The project works without a token using four local sample films. With a token, search and detail pages request current movie data from TMDB. WeChat production builds also require `api.themoviedb.org` and `image.tmdb.org` to be added to the Mini Program request and download domain allowlists.
-
-## 中文介绍
-
-“我的观影手账”是一款正在开发中的微信小程序，供本人记录看过的电影及重看次数。计划支持电影搜索、海报、导演与主演、剧情梗概、按制片国家或地区分类，以及观影统计和备份导出。
-
-同一部电影看了三遍，统计为 **1 部电影、3 次观看**。每次观看可以单独记录日期、评分和感想。
-
-本项目仅用于个人非商业用途，无广告、付费功能或公开社交功能。本仓库目前是项目介绍，不代表小程序已经上线。不要在公开仓库中上传 API 凭证或个人观影记录。
+不要向公开仓库提交接口凭证、个人观影记录或开发者工具本地配置。

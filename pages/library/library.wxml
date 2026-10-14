@@ -1,14 +1,23 @@
-<view class="page-shell">
-  <view class="eyebrow">MY LIBRARY</view>
+<view class="page-shell {{revealing ? 'page-enter' : ''}}">
+  <view class="eyebrow">COLLECTION / MY FILMS</view>
   <view class="page-title">我的片库</view>
-  <view class="library-toolbar"><view class="muted">按国家或地区整理你的观看记录</view><button class="filter-btn" bindtap="chooseFilter">{{filter || '筛选'}}</button></view>
+  <view class="muted">看过的故事，在这里慢慢积累。</view>
+  <view class="panel library-summary"><view><text class="summary-number">{{totalCount}}</text><text class="summary-unit"> 部电影</text></view><view class="summary-caption">共 {{totalViews}} 次观看</view></view>
+  <view class="section-head"><view class="section-title">{{filter || '全部电影'}}</view><button class="filter-btn {{filterOpen ? 'active' : ''}}" bindtap="chooseFilter">国家 / 地区 <text>{{filterOpen ? '−' : '+'}}</text></button></view>
+  <view wx:if="{{filterOpen}}" class="filter-panel panel page-enter">
+    <view class="filter-chip {{!filter ? 'selected' : ''}}" bindtap="setFilter" data-country="">全部</view>
+    <view class="filter-chip {{filter === item ? 'selected' : ''}}" wx:for="{{countries}}" wx:key="*this" bindtap="setFilter" data-country="{{item}}">{{item}}</view>
+    <view wx:if="{{!countries.length}}" class="filter-hint">记录电影后，可按国家或地区筛选。</view>
+  </view>
   <view wx:if="{{movies.length}}" class="grid library-grid">
     <view class="movie-card" wx:for="{{movies}}" wx:key="id" data-movie="{{item}}" bindtap="openDetail">
-      <image class="poster" mode="aspectFill" src="{{item.poster}}" />
-      <view class="movie-name">{{item.title}}</view>
-      <view class="movie-meta">{{item.year}} · {{item.countryLabel}}</view>
-      <view class="watch-count">看过 {{item.watchCount}} 次</view>
+      <view class="poster-frame">
+        <image class="poster" mode="aspectFill" src="{{item.poster || '/assets/poster-placeholder.png'}}" binderror="onPosterError" data-id="{{item.id}}" />
+        <view class="poster-shade"></view><view class="poster-year">{{item.year}}</view><view class="poster-badge">{{item.watchCount}} 次</view>
+      </view>
+      <view class="card-copy"><view class="movie-name">{{item.title}}</view><view class="movie-meta">{{item.countryLabel || '未分类'}}</view><view class="watch-count">已看 {{item.watchCount}} 次 <text class="watch-check">✓</text></view></view>
     </view>
   </view>
-  <view wx:else class="panel empty"><view class="empty-title">片库还空着</view><view>在“发现”里找到电影并标记看过。</view></view>
+  <view wx:else class="panel empty"><image class="empty-icon" src="/assets/icons/library.png" /><view class="empty-title">{{filter ? '这里还没有电影' : '第一部电影，等你记录'}}</view><view>{{filter ? '换个国家或地区看看。' : '从一部喜欢的电影开始，建立你的片库。'}}</view><view class="empty-action" bindtap="goDiscover">去发现电影 →</view></view>
+  <view class="footer-note">COLLECT MOMENTS, COLLECT FILMS</view>
 </view>

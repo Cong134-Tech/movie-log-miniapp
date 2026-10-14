@@ -7,20 +7,20 @@
   ],
   "window": {
     "navigationBarTitleText": "我的观影手账",
-    "navigationBarBackgroundColor": "#10161f",
+    "navigationBarBackgroundColor": "#09090b",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#f4f6f8",
-    "backgroundTextStyle": "light"
+    "backgroundColor": "#09090b",
+    "backgroundTextStyle": "dark"
   },
   "tabBar": {
-    "color": "#84909f",
-    "selectedColor": "#d95f59",
-    "backgroundColor": "#ffffff",
-    "borderStyle": "white",
+    "color": "#797784",
+    "selectedColor": "#ff6975",
+    "backgroundColor": "#111114",
+    "borderStyle": "black",
     "list": [
-      { "pagePath": "pages/home/home", "text": "发现" },
-      { "pagePath": "pages/library/library", "text": "片库" },
-      { "pagePath": "pages/stats/stats", "text": "统计" }
+      { "pagePath": "pages/home/home", "text": "发现", "iconPath": "assets/icons/discover.png", "selectedIconPath": "assets/icons/discover-active.png" },
+      { "pagePath": "pages/library/library", "text": "片库", "iconPath": "assets/icons/library.png", "selectedIconPath": "assets/icons/library-active.png" },
+      { "pagePath": "pages/stats/stats", "text": "统计", "iconPath": "assets/icons/stats.png", "selectedIconPath": "assets/icons/stats-active.png" }
     ]
   },
   "style": "v2",

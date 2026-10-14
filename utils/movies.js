@@ -1,4 +1,4 @@
-const PLACEHOLDER = '/assets/poster-placeholder.svg'
+const PLACEHOLDER = '/assets/poster-placeholder.png'
 
 const samples = [
   { id: 'sample-parasite', title: '寄生虫', originalTitle: '기생충', year: '2019', countries: ['韩国'], director: '奉俊昊', cast: ['宋康昊', '李善均', '赵汝贞'], overview: '一场看似偶然的相遇，让两个家庭的生活逐渐交织，并揭开了阶层与尊严的复杂寓言。', poster: PLACEHOLDER },
@@ -8,6 +8,7 @@ const samples = [
 ]
 
 samples.forEach(movie => {
+  movie.poster = `/assets/posters/${movie.id}.png`
   movie.countryLabel = movie.countries.join(' / ')
   movie.castLabel = movie.cast.join('、')
 })

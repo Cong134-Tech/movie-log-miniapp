@@ -1,15 +1,33 @@
-<view class="page-shell">
-  <view class="eyebrow">YOUR WATCHING YEAR</view>
-  <view class="page-title">看过多少？</view>
+<view class="page-shell {{revealing ? 'page-enter' : ''}} {{tokenSheetVisible ? 'sheet-behind' : ''}}">
+  <view class="eyebrow">INSIGHTS / YOUR JOURNEY</view>
+  <view class="page-title">光影足迹</view>
+  <view class="muted">每一次观看，都算数。</view>
   <view class="stat-grid">
-    <view class="stat-card"><view class="stat-number">{{movieCount}}</view><view class="stat-label">部电影</view></view>
-    <view class="stat-card accent"><view class="stat-number">{{viewCount}}</view><view class="stat-label">次观看</view></view>
+    <view class="stat-card"><view class="stat-index">01 / FILMS</view><view class="stat-number">{{movieCount}}</view><view class="stat-label">部电影</view></view>
+    <view class="stat-card accent"><view class="stat-index">02 / VIEWINGS</view><view class="stat-number">{{viewCount}}</view><view class="stat-label">次观看</view><view class="stat-decoration"></view></view>
   </view>
-  <view class="section-head"><view class="section-title">按国家或地区</view><view><button class="export-btn" bindtap="configureToken">配置 TMDB</button><button class="export-btn export-gap" bindtap="exportRecords">导出记录</button></view></view>
+  <view class="section-head"><view class="section-title">银幕上的世界</view><view class="section-action">国家 / 地区</view></view>
   <view wx:if="{{countries.length}}" class="panel country-list">
-    <view class="country-row" wx:for="{{countries}}" wx:key="name"><view>{{item.name}}</view><view class="country-count">{{item.count}} 部</view></view>
+    <view class="country-row" wx:for="{{countries}}" wx:key="name"><view class="country-line"><view>{{item.name}}</view><view class="country-count">{{item.count}}<text> 部</text></view></view><view class="country-track"><view class="country-fill" style="width: {{item.percent}}%;"></view></view></view>
+    <view class="country-note">合拍电影会分别计入各制片国家或地区。</view>
   </view>
-  <view wx:else class="panel empty"><view class="empty-title">统计会在这里出现</view><view>标记第一部看过的电影吧。</view></view>
-  <view wx:if="{{latest.length}}" class="section-head"><view class="section-title">最近观看</view></view>
-  <view wx:if="{{latest.length}}" class="panel latest-list"><view class="latest-row" wx:for="{{latest}}" wx:key="id"><view><view class="latest-name">{{item.movie.title}}</view><view class="movie-meta">{{item.watchedAt}}</view></view><view class="pill">已记录</view></view></view>
+  <view wx:else class="panel empty"><image class="empty-icon" src="/assets/icons/globe.png" /><view class="empty-title">统计会在这里出现</view><view>从第一部电影开始，点亮你的光影地图。</view></view>
+  <view wx:if="{{latest.length}}" class="section-head"><view class="section-title">最近观看</view><view class="section-action">RECENT</view></view>
+  <view wx:if="{{latest.length}}" class="panel latest-list"><view class="latest-row" wx:for="{{latest}}" wx:key="id" data-movie="{{item.movie}}" bindtap="openDetail"><image class="latest-poster" mode="aspectFill" src="{{item.movie.poster || '/assets/poster-placeholder.png'}}" binderror="onPosterError" data-id="{{item.movie.id}}" /><view class="latest-copy"><view class="latest-name">{{item.movie.title}}</view><view class="movie-meta">{{item.watchedAt}}</view></view><view class="latest-index">{{index + 1 < 10 ? '0' + (index + 1) : index + 1}}</view></view></view>
+  <view class="section-head"><view class="section-title">管理手账</view></view>
+  <view class="panel settings-panel">
+    <view class="settings-row" bindtap="configureToken"><image class="settings-icon" src="/assets/icons/link.png" /><view class="settings-copy"><view class="settings-title">配置 TMDB</view><view class="settings-caption">{{tokenConfigured ? '电影资料已连接 · 可更新凭证' : '连接电影海报与详细资料'}}</view></view><text class="chevron">›</text></view>
+    <view class="settings-row" bindtap="exportRecords"><image class="settings-icon" src="/assets/icons/export.png" /><view class="settings-copy"><view class="settings-title">导出观看记录</view><view class="settings-caption">为你的观影记忆留一份备份</view></view><text class="chevron">›</text></view>
+  </view>
+  <view class="footer-note">YOUR OWN CINEMA HISTORY</view>
+</view>
+<view wx:if="{{tokenSheetVisible}}" class="sheet-mask" bindtap="closeTokenSheet" catchtouchmove="stopTouch"></view>
+<view wx:if="{{tokenSheetVisible}}" class="token-sheet">
+  <view class="sheet-handle"></view>
+  <view class="sheet-head"><view class="section-title">连接电影资料</view><button class="sheet-close" bindtap="closeTokenSheet">×</button></view>
+  <view class="muted">粘贴 TMDB 的 API Read Access Token。</view>
+  <textarea class="token-input" value="{{tokenDraft}}" bindinput="onTokenInput" placeholder="API Read Access Token" placeholder-class="token-placeholder" maxlength="4096" auto-height="{{false}}" adjust-position="{{true}}" />
+  <view wx:if="{{tokenError}}" class="token-error">{{tokenError}}</view>
+  <view class="sheet-note">保存在当前设备，随时可以更新。</view>
+  <button class="primary-btn token-save" bindtap="saveToken">保存连接</button>
 </view>

@@ -1,6 +1,15 @@
-.search-box { display: flex; gap: 14rpx; margin-top: 34rpx; background: #fff; padding: 10rpx 10rpx 10rpx 24rpx; border-radius: 14rpx; box-shadow: 0 12rpx 30rpx rgba(20,30,40,.06); }
-.search-box input { flex: 1; height: 74rpx; font-size: 27rpx; }
-.search-button { width: 132rpx; margin: 0; padding: 0; line-height: 74rpx; background: #17202b; color: #fff; border-radius: 10rpx; font-size: 26rpx; }
-.demo-note { margin-top: 18rpx; color: #9a6a42; background: #fff4e8; padding: 14rpx 18rpx; border-radius: 10rpx; font-size: 22rpx; }
-.mark-button { margin: 14rpx 0 0; width: 100%; padding: 0; line-height: 58rpx; background: #f5e9e6; color: #b14f49; border-radius: 9rpx; font-size: 23rpx; }
-.loading { color: #7d8792; text-align: center; }
+.brand-row { display: flex; justify-content: space-between; align-items: center; }
+.brand-dot { width: 12rpx; height: 12rpx; background: #fa4c5d; border-radius: 50%; box-shadow: 0 0 22rpx rgba(248, 54, 77, .45); }
+.search-box { display: flex; align-items: center; gap: 18rpx; margin-top: 36rpx; background: #19191e; padding: 10rpx 10rpx 10rpx 22rpx; border: 1rpx solid #303039; border-radius: 24rpx; box-shadow: 0 12rpx 32rpx rgba(0, 0, 0, .24); }
+.search-icon { width: 34rpx; height: 34rpx; flex-shrink: 0; opacity: .75; }
+.search-box input { flex: 1; min-width: 0; height: 76rpx; font-size: 26rpx; color: #f5f3ef; }
+.input-placeholder { color: #797784; }
+button.search-button { width: 128rpx; flex: 0 0 128rpx; margin: 0; padding: 0; line-height: 76rpx; background: linear-gradient(120deg, #df3148, #b72140); color: #fff; border-radius: 17rpx; font-size: 25rpx; }
+.demo-note { display: flex; align-items: center; gap: 10rpx; margin-top: 20rpx; color: #8c8793; font-size: 21rpx; line-height: 1.6; }
+.status-dot { width: 7rpx; height: 7rpx; border-radius: 50%; background: #ff6774; flex-shrink: 0; }
+button.mark-button { display: flex; align-items: center; justify-content: center; gap: 10rpx; margin: 20rpx 0 0; width: 100%; box-sizing: border-box; padding: 0; height: 66rpx; line-height: 66rpx; background: #272026; border: 1rpx solid #4a2b35; color: #ff858d; border-radius: 14rpx; font-size: 23rpx; }
+.mark-button.is-watched { background: #222227; border-color: #38383f; color: #c8c4ce; }
+.mark-symbol { font-size: 30rpx; line-height: 1; font-weight: 400; }
+.loading { color: #aaa4b1; text-align: center; padding: 56rpx 24rpx; font-size: 26rpx; }
+.loading-orbit { width: 44rpx; height: 44rpx; margin: 0 auto 24rpx; border: 3rpx solid #3c242e; border-top-color: #ff646e; border-radius: 50%; animation: orbit 900ms linear infinite; }
+@keyframes orbit { to { transform: rotate(360deg); } }
