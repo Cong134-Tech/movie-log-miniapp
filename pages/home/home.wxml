@@ -13,7 +13,7 @@
   <view wx:elif="{{results.length}}" class="grid">
     <view class="movie-card" wx:for="{{results}}" wx:key="id" data-movie="{{item}}" bindtap="openDetail">
       <view class="poster-frame">
-        <image class="poster" mode="aspectFill" src="{{item.poster || '/assets/poster-placeholder.png'}}" binderror="onPosterError" data-id="{{item.id}}" />
+        <image class="poster" mode="aspectFill" src="{{item.poster || '/assets/poster-placeholder.jpg'}}" binderror="onPosterError" data-id="{{item.id}}" />
         <view class="poster-shade"></view><view class="poster-year">{{item.year}}</view>
         <view wx:if="{{item.watchCount}}" class="poster-badge">{{item.watchCount}} 次</view>
       </view>

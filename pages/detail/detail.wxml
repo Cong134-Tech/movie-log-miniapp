@@ -2,7 +2,7 @@
   <view class="eyebrow">FILM / {{movie.year || 'YOUR NEXT MEMORY'}}</view>
   <view class="detail-hero">
     <view class="hero-glow"></view>
-    <view class="hero-poster-frame"><image class="hero-poster" mode="aspectFill" src="{{movie.poster || '/assets/poster-placeholder.png'}}" binderror="onPosterError" /><view wx:if="{{watchCount}}" class="hero-badge">已看 {{watchCount}} 次</view></view>
+    <view class="hero-poster-frame"><image class="hero-poster" mode="aspectFill" src="{{movie.poster || '/assets/poster-placeholder.jpg'}}" binderror="onPosterError" /><view wx:if="{{watchCount}}" class="hero-badge">已看 {{watchCount}} 次</view></view>
   </view>
   <view class="detail-title">{{movie.title}}</view>
   <view class="original-title">{{movie.originalTitle}}</view>

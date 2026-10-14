@@ -3,7 +3,7 @@
   <view class="title-row"><view><view class="page-title">观影墙</view><view class="muted">从最近一次观看，回望每一部故事。</view></view><view class="wall-count">{{movies.length}}<text> 部</text></view></view>
   <view wx:if="{{movies.length}}" class="wall-grid">
     <view class="wall-card" wx:for="{{movies}}" wx:key="id" data-movie="{{item}}" bindtap="openDetail">
-      <view class="wall-poster-frame"><image class="wall-poster" mode="aspectFill" src="{{item.poster || '/assets/poster-placeholder.png'}}" binderror="onPosterError" data-id="{{item.id}}" /><view class="wall-shade"></view><view wx:if="{{item.year}}" class="wall-year">{{item.year}}</view><view class="wall-watch-count">{{item.watchCount}} 次</view></view>
+      <view class="wall-poster-frame"><image class="wall-poster" mode="aspectFill" src="{{item.poster || '/assets/poster-placeholder.jpg'}}" binderror="onPosterError" data-id="{{item.id}}" /><view class="wall-shade"></view><view wx:if="{{item.year}}" class="wall-year">{{item.year}}</view><view class="wall-watch-count">{{item.watchCount}} 次</view></view>
       <view class="wall-name">{{item.title}}</view>
       <view class="wall-date">最近 {{item.lastWatchedAt}}</view>
     </view>

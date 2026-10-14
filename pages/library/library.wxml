@@ -12,7 +12,7 @@
   <view wx:if="{{movies.length}}" class="grid library-grid">
     <view class="movie-card" wx:for="{{movies}}" wx:key="id" data-movie="{{item}}" bindtap="openDetail">
       <view class="poster-frame">
-        <image class="poster" mode="aspectFill" src="{{item.poster || '/assets/poster-placeholder.png'}}" binderror="onPosterError" data-id="{{item.id}}" />
+        <image class="poster" mode="aspectFill" src="{{item.poster || '/assets/poster-placeholder.jpg'}}" binderror="onPosterError" data-id="{{item.id}}" />
         <view class="poster-shade"></view><view class="poster-year">{{item.year}}</view><view class="poster-badge">{{item.watchCount}} 次</view>
       </view>
       <view class="card-copy"><view class="movie-name">{{item.title}}</view><view class="movie-meta">{{item.countryLabel || '未分类'}}</view><view class="watch-count">已看 {{item.watchCount}} 次 <text class="watch-check">✓</text></view></view>
